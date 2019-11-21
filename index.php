@@ -20,6 +20,16 @@
     </nav>
 </header>
 <main>
+<script>
+$(document).ready(function() {
+    $.ajax({url: "ajax1.php"}).done(function (data) {
+        $("#hierinfo").html(data);})
+        ;});
+</script>
+
+<section id="hierinfo">
+
+</section>
 
 
 </main>
