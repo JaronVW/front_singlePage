@@ -20,20 +20,25 @@
     </nav>
 </header>
 <main>
-<script>
 
-$(document).ready(function () {
-    $.ajax({url: "ajax.php"})
-    .done(function (data) {
-        $("#hierinfo").html(data);})
-    .fail(function () {
-        $("#hierinfo").text("AJAX request mislukt!");})
-    .always(function () {
-        alert("AJAX request klaar.");})
-    ;});
-    // het werkt niet en dat is de bedoeling
 
-</script>
+<script> 
+    $(document).ready(function(){
+            $.ajax({
+                url: "ajax3.php",
+                dataType: "json"
+            })
+            .done(function (data) {
+                    var output = " <p> ";
+                    for (var i in data) {
+                        output += data[i] + " heeft nummer" + i + " <br> ";
+                    }
+                    output += " </p>";
+                    $("#hierinfo").html(output);}
+                );
+            }); 
+        </script>
+
 
 <section id="hierinfo">
 
