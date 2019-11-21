@@ -21,10 +21,18 @@
 </header>
 <main>
 <script>
-$(document).ready(function() {
-    $.ajax({url: "ajax1.php"}).done(function (data) {
+
+$(document).ready(function () {
+    $.ajax({url: "ajax.php"})
+    .done(function (data) {
         $("#hierinfo").html(data);})
-        ;});
+    .fail(function () {
+        $("#hierinfo").text("AJAX request mislukt!");})
+    .always(function () {
+        alert("AJAX request klaar.");})
+    ;});
+    // het werkt niet en dat is de bedoeling
+
 </script>
 
 <section id="hierinfo">
