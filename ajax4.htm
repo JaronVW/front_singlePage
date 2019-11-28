@@ -1,0 +1,18 @@
+<script>
+    $(document).ready(function () {
+    $.getJSON("ajax4.php").done(function (data) {
+    var output = "<ul>";
+        for (var i in data) {
+        output += "<li>" + data[i].title + "<br>";
+            if (data[i].complete == 1) {
+            output += "Gesloten";
+            } else {
+            output += "Open";
+            }
+            output += "</li>";
+        }
+        output += "</ul>";
+    $("#hierinfo").html(output);
+    });
+    });
+</script>
