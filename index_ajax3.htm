@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery.js"></script>
+    <title>Front: single page</title>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+
+
+        <script>
+            $(document).ready(function () {
+
+              
+
+                $.getJSON("ajax3.php")
+                    .done(function (data) {
+                        var output = " <p> ";
+                        for (var i in data) {
+                            output += data[i] + " heeft nummer " + i + " <br> ";
+
+                        }
+                        output += "</p>";
+                    $("#hierinfo").html(output);
+                });
+            });
+        </script>
+
+
+        <section id="hierinfo">
+
+        </section>
+
+
+    </main>
+
+    <footer>
+    </footer>
+
+</body>
+
+</html>
