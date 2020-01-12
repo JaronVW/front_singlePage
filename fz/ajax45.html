@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script src="js/jquery.js"> </script>
+
+    <input type="text" name="" id="invoer">
+    <button id="knop">indrukken</button>
+    <section id="resultaat">
+        <script>
+            $(document).ready(function () {
+                $.getJSON("ajax45.php").done(function (data) {
+                    var output = "<ul>";
+                    for (var i in data) {
+                        output += "<li>" + data[i].title + "<br>";
+                        if (data[i].complete == 1) {
+                            output += "Gesloten";
+                        } else {
+                            output += "Open";
+                        }
+                        output += "</li>";
+                    }
+                    output += "</ul>";
+                    $("#hierinfo").html(output);
+                });
+            });
+
+
+            $("#knop").click(function () {
+                var invoer = $("#invoer").val();
+                $.ajax({
+                    url: "ajax45.php",
+                    method: "POST",
+                    data: {
+                        'invoer': invoer
+                    }
+
+                }).done(function (data) {
+                    if (data == "OK") {
+                        $("#resultaat").text("Gelukt!");
+                    } else {
+                        $("#resultaat").text("Er ging iets fout!");
+                    }
+                });
+
+            });
+        </script>
+
+        <div id="hierinfo"></div>
+
+</body>
+
+</html>
