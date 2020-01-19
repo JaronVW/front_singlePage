@@ -1,23 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <script src="js/jquery.js"></script>
+    <title>5</title>
 </head>
 
 <body>
-
-    <script src="js/jquery.js">
-
-
-    </script>
-
-
     <script>
         $(document).ready(function () {
+            
+            $("#knop").click(function () {
+                var invoer = $("#invoer").val();
+                $.ajax({
+                    url: "ajax5.php",
+                    method: "POST",
+                    data: {
+                        'invoer': invoer
+                    }
+                }).done(function (data) {
+                    if (data == "OK") {
+                        $("#resultaat").text("Gelukt!");
+                    } else {
+                        $("#resultaat").text("Er ging iets fout!");
+                    }
+                });
+            });
+
 
             $.getJSON("ajax4.php").done(function (data) {
                 var output = "<ul>";
@@ -36,7 +48,10 @@
         });
     </script>
 
-    <div id="hierinfo"></div>
+    <input type="text" name="" id="invoer">
+    <button id="knop">indrukken</button>
+    <section id="resultaat"></section>
+    <section id="hierinfo" ></section>
 
 </body>
 
