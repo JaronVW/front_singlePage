@@ -5,9 +5,9 @@ error_reporting(E_ALL);
 // show errors
 
 $db_hostname = "localhost";
-$db_username = 'ajas_83817';
-$db_password = 'imZt36_3';
-$db_name = 'Ajax';
+$db_username = 'root';
+$db_password = '';
+$db_name = 'schoolwork';
 
 $mysqliConnect = mysqli_connect($db_hostname, $db_username, $db_password, $db_name);
 if (!$mysqliConnect) 
