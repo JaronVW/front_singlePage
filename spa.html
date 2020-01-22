@@ -13,73 +13,100 @@
 
     </script>
     <title>TODO list: jaron van Well</title>
+    <style>
+        body {
+            padding: 30px;
+        }
+    </style>
 </head>
 
 <body>
+    <h1>TODO list: jaron van Well</h1>
     <script>
         $(document).ready(function () {
-            function uitlezen() {
-                $.getJSON("uitlezen.php").done(function (data) {
-                    var output = '<table class="table table-dark"><thead> <tr><th scope="col">#</th> <th scope="col">Taak</th> <th scope="col">Voltooid?</th> <th scope="col">op voltooid zetten</th></tr> </thead> <tbody>';
-                    for (var i in data) {
-                        output += '<tr> <td class="'+data[i].id +'" >'+ data[i].id + "</td>";
-                        output += '<td class="" >' + data[i].title + "</td>";
-                        if (data[i].complete == 1) {
-                            output += "<td>Gesloten</td>";
-                        } else {
-                            output += "<td>Open</td>";
-                        }
-                        output += '<td><button class="voltooid" >op voltooid zetten?</button></td>';
-          }
-                    output += "</tr>";
-                    $("#hierinfo").html(output);
-                });
+                    function uitlezen() {
+                        $.getJSON("uitlezen.php").done(function (data) {
+                            var output =
+                                '<table class="table table-dark"><thead> <tr><th scope="col">#</th> <th scope="col">Taak</th> <th scope="col">Voltooid?</th> <th scope="col">op voltooid zetten</th></tr> </thead> <tbody>';
+                            for (var i in data) {
+                                output += '<tr> <td class="' + data[i].id + '" >' + data[i].id + "</td>";
+                                output += '<td class="" >' + data[i].title + "</td>";
+                                if (data[i].complete == 1) {
+                                    output += "<td>Gesloten</td>";
+                                } else {
+                                    output += "<td>Open</td>";
+                                }
+                                output += '<td><button id="'+ data[i].id + ' "  class="voltooid btn btn-success " >op voltooid zetten?</button></td>';
+                            }
+                            output += "</tr>";
+                            $("#hierinfo").html(output);
+                        });
 
-            }
-            uitlezen();
-            $("#knop").click(function () {
-                var invoer = $("#invoer").val();
-                $.ajax({
-                    url: "spa.php",
-                    method: "POST",
-                    data: {
-                        'invoer': invoer
                     }
-                }).done(function (data) {
-                    if (data == "OK") {
-                        $("#resultaat").text("Gelukt!");
-                        uitlezen();
+                    uitlezen();
+                    $("#knop").click(function () {
+                        var invoer = $("#invoer").val();
+                        $.ajax({
+                            url: "spa.php",
+                            method: "POST",
+                            data: {
+                                'invoer': invoer
+                            }
+                        }).done(function (data) {
+                            if (data == "OK") {
+                                $("#resultaat").text("Gelukt!");
+                                uitlezen();
 
-                    } else {
-                        $("#resultaat").text("Er ging iets fout!");
-                    }
-                });
-            });
+                            } else {
+                                $("#resultaat").text("Er ging iets fout!");
+                            }
+                        });
+                    });
+                    uitlezen();
 
-            uitlezen();
-            $(".voltooid").click(function () {
-                // var invoer = $("#voltooid").val();
-                alert("hij doet iets");
-                // $.ajax({
-                //     url: "voltooid.php",
-                //     method: "POST",
-                //     data: {
-                //         'invoer': invoer
-                //     }
-                // }).done(function (data) {
-                //     if (data == "OK") {
-                //       uitlezen();
+                    $(document).on('click', '.voltooid', function () {
+                        let gesloten_open = $(this).attr("id");
+                        
+                        $.ajax({
+                            url: "voltooid.php",
+                            method: "POST",
+                            data: {
+                                'gesloten_open': gesloten_open
+                            }
+                        }).done(function (data) {
+                            if (data == "OK") {
+                                uitlezen();
 
-                //     } else {
-                //         $("#resultaat").text("Er ging iets fout!");
-                //     }
-                // });
-            });
-        });
+                            } else {
+                                console.log("hallo")
+                            }
+                        });
+                    });
+
+
+                        // $(".voltooid").click(function () {
+                        //     // var invoer = $("#voltooid").val();
+                        //     alert("hij doet iets");
+                        //     // $.ajax({
+                        //     //     url: "voltooid.php",
+                        //     //     method: "POST",
+                        //     //     data: {
+                        //     //         'invoer': invoer
+                        //     //     }
+                        //     // }).done(function (data) {
+                        //     //     if (data == "OK") {
+                        //     //       uitlezen();
+
+                        //     //     } else {
+                        //     //         $("#resultaat").text("Er ging iets fout!");
+                        //     //     }
+                        //     // });
+                        // }); 
+                    });
     </script>
 
-    <input type="text" name="" id="invoer">
-    <button id="knop">indrukken</button> <br> <br> <br>
+    <input type="text"   name="" id="invoer">
+    <button class="btn btn-primary" id="knop">indrukken</button> <br> <br> <br>
     <section id="resultaat">
 
 
