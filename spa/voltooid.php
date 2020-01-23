@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 
 $db_hostname = "localhost";
 $db_username = 'root';
-$db_password = '';
+$db_password = '#1Geheimm';
 $db_name = 'schoolwork';
 
 $mysqliConnect = mysqli_connect($db_hostname, $db_username, $db_password, $db_name);
