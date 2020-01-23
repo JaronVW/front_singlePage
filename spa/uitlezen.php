@@ -8,6 +8,7 @@ $db_hostname = "localhost";
 $db_username = 'root';
 $db_password = '#1Geheimm';
 $db_name = 'schoolwork';
+// local database credentials
 
 $mysqliConnect = mysqli_connect($db_hostname, $db_username, $db_password, $db_name);
 if (!$mysqliConnect) 
@@ -32,3 +33,4 @@ else
     echo json_encode($data);
 
 }
+// leest de database uit

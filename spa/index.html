@@ -22,6 +22,8 @@
 
 <body>
     <h1>TODO list: jaron van Well</h1>
+
+    
     <script>
         $(document).ready(function () {
             function uitlezen() {
@@ -36,7 +38,7 @@
                         } else {
                             output += "<td>Open</td>";
                         }
-                        output += '<td><button id="' + data[i].id +
+                        output += '<td><button data-toggle="modal" data-target="#exampleModalLong" id="' + data[i].id +
                             ' "  class="voltooid btn btn-success " >voltooid?</button></td>';
                         output += '<td><button id="' + data[i].id +
                             ' "  class="verwijderen btn btn-danger " >verwijderen?</button></td>';
@@ -47,6 +49,7 @@
                 });
 
             }
+            // leest de database uit en stuurt het in een tabel naar het scherm
             uitlezen();
             $("#knop").click(function () {
                 var invoer = $("#invoer").val();
@@ -66,10 +69,12 @@
                     }
                 });
             });
+            // voegt data toe aan de  database en roept uitlezen()
             uitlezen();
 
             $(document).on('click', '.voltooid', function () {
                 let gesloten_open = $(this).attr("id");
+                // haalt de id op en stopt het in een variabel
 
                 $.ajax({
                     url: "voltooid.php",
@@ -77,6 +82,7 @@
                     data: {
                         'gesloten_open': gesloten_open
                     }
+                    // maakt een post aan en stuurt die door naar het php bestand
                 }).done(function (data) {
                     if (data == "OK") {
                         uitlezen();
@@ -88,11 +94,12 @@
 
 
             });
+            // functie om de taken op voltooid te zetten
 
 
             $(document).on('click', '.verwijderen', function () {
                 let verwijderen = $(this).attr("id");
-
+                // haalt de id op en stopt het in een variabel
                 $.ajax({
                     url: "verwijderen.php",
                     method: "POST",
@@ -107,12 +114,33 @@
                         console.log("hallo")
                     }
                 });
+                // functie om een entry te verwijderen
 
 
             });
         });
 
     </script>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <input type="text" name="" id="invoer">
     <button class="btn btn-primary" id="knop">indrukken</button> <br> <br> <br>

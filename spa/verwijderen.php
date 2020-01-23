@@ -35,3 +35,4 @@ else
         } 
     
 }
+// verwdijert het door de gebruiker geselecteerde item door middel van de id 

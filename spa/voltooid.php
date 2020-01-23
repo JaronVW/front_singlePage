@@ -35,3 +35,4 @@ else
         } 
     
 }
+// update de taak naar gesloten gebasseerd op de id van het geselecteerde item
